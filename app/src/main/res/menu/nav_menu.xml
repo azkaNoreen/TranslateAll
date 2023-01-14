@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bookmarkedList"
+        android:title="Bookmarked List"
+        android:icon="@drawable/ic_baseline_star_24"
+        ></item>
+    <item
+        android:id="@+id/history"
+        android:title="History"
+        android:icon="@drawable/ic_baseline_history_24"
+        ></item>
+    <item
+        android:id="@+id/settings"
+        android:title="Settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        ></item>
+    <item
+        android:id="@+id/rateUs"
+        android:title="Rate Us"
+        android:icon="@drawable/ic_baseline_thumb_up_24"
+        ></item>
+    <item
+        android:id="@+id/share"
+        android:title="Share with friends"
+        android:icon="@drawable/ic_baseline_share_24"
+        ></item>
+    <item
+        android:id="@+id/clearTranslations"
+        android:title="Clear All Translations"
+        android:icon="@drawable/ic_baseline_delete_24"
+        ></item>
+    <item
+        android:id="@+id/clearConversations"
+        android:title="Clear All Conversations"
+        android:icon="@drawable/ic_baseline_delete_24"
+        ></item>
+</menu>

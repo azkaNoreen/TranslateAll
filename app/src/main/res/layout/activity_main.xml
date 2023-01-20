@@ -18,7 +18,7 @@
             app:titleTextColor="@color/white"
             android:id="@+id/toolba"
             app:title="All Translate"
-            android:background="#4286F5"
+            android:background="#2D7BF8"
             ></androidx.appcompat.widget.Toolbar>
         <RelativeLayout
             android:layout_width="match_parent"
@@ -90,12 +90,25 @@ android:id="@+id/ur"
             android:id="@+id/btmbox"
             android:background="@drawable/bottom_bg"
                android:elevation="3dp">
-
+            <ImageButton
+                android:background="@drawable/bottom_bg"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/cancel"
+                android:src="@drawable/ic_baseline_close_24"
+                android:visibility="invisible"
+                ></ImageButton>
             <EditText
+                android:id="@+id/text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@null"
@@ -108,7 +121,9 @@ android:id="@+id/ur"
                 android:layout_alignParentBottom="true"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="5dp"
-                android:layout_marginBottom="10dp"                android:id="@+id/button"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/camera"
+                android:tag="Camera"
                 android:src="@drawable/ic_baseline_photo_camera_24"
                 ></ImageButton>
             <ImageButton
@@ -116,15 +131,90 @@ android:id="@+id/ur"
                 android:layout_height="40dp"
                 android:background="@drawable/rounder"
                 android:layout_alignParentBottom="true"
-                android:layout_toLeftOf="@+id/button"
+                android:layout_toLeftOf="@+id/camera"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="10dp"
-                android:id="@+id/button2"
+                android:id="@+id/mic"
                 android:src="@drawable/ic_baseline_mic_24"
                 ></ImageButton>
 
             </RelativeLayout>
+        <RelativeLayout
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_below="@+id/btmbox"
+            android:id="@+id/bottombox"
+            android:background="@drawable/bluebg"
+            android:elevation="3dp"
+            android:visibility="invisible">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@null"
+                android:text="Urdu"
+                android:textColor="@color/white"
+                android:id="@+id/translationLanguage"
+                android:textStyle="bold"
+                ></TextView>
+            <TextView
+                android:layout_below="@+id/translationLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@null"
+                android:text="Urdu"
+                android:textColor="@color/white"
+                android:id="@+id/translation"
+                ></TextView>
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="7dp"
+                android:id="@+id/translationOption"
+                android:src="@drawable/ic_baseline_more_vert_24"
+                android:background="@drawable/rounder"
+                ></ImageButton>
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/translationOption"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="7dp"
+                android:id="@+id/translationSpeaker"
+                android:src="@drawable/ic_baseline_volume_up_24"
+                android:background="@drawable/rounder"
+                ></ImageButton>
+
+            <ImageButton
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/translationSpeaker"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="7dp"
+                android:id="@+id/translationStar"
+                android:src="@drawable/ic_baseline_star_24"
+                android:background="@drawable/rounder"
+                ></ImageButton>
+
+        </RelativeLayout>
 
     </RelativeLayout>
     <com.google.android.material.navigation.NavigationView

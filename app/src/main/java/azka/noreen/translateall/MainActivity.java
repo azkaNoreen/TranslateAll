@@ -1,20 +1,25 @@
 package azka.noreen.translateall;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
@@ -26,6 +31,26 @@ public class MainActivity extends AppCompatActivity {
     EditText text;
     ImageButton cancel,camera,mic;
     RelativeLayout bottombg;
+    TextView language1,language2,translation;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 50 && resultCode==RESULT_OK) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    language1.setText(data.getStringExtra("Name"));
+                }
+            }
+        }
+        else if(requestCode == 500 && resultCode==RESULT_OK) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
+                    language2.setText(data.getStringExtra("Name"));
+                }
+            }
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +64,24 @@ public class MainActivity extends AppCompatActivity {
         camera=findViewById(R.id.camera);
         mic=findViewById(R.id.mic);
         bottombg=findViewById(R.id.bottombox);
+        language1=findViewById(R.id.eng);
+        language2=findViewById(R.id.ur);
+        translation=findViewById(R.id.translation);
+
+        language1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(MainActivity.this, Languages.class);
+                startActivityForResult(in, 50);
+            }
+        });
+        language2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent(MainActivity.this, Languages.class);
+                startActivityForResult(in, 500);
+            }
+        });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(camera.getTag().equals("Arrow")){
+                    translation.setText(text.getText().toString());
+                    mic.setVisibility(View.VISIBLE);
+                    mic.setImageResource(R.drawable.ic_baseline_volume_up_24);
                     bottombg.setVisibility(View.VISIBLE);
                 }
             }

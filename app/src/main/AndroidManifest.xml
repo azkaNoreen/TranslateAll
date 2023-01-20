@@ -13,6 +13,13 @@
         android:theme="@style/Theme.TranslateAll"
         tools:targetApi="31">
         <activity
+            android:name=".Languages"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Translations"
             android:exported="false">
             <meta-data

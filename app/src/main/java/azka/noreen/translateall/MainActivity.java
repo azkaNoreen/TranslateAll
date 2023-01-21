@@ -9,6 +9,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton cancel,camera,mic;
     RelativeLayout bottombg;
     TextView language1,language2,translation;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor sharedPreferencesEditor;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -40,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
                     language1.setText(data.getStringExtra("Name"));
+                    putPrefernceValues("Name",data.getStringExtra("Name"));
                 }
             }
         }
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == Activity.RESULT_OK) {
                 if (data != null) {
                     language2.setText(data.getStringExtra("Name"));
+                    putPrefernceValues("Second",data.getStringExtra("Name"));
                 }
             }
         }
@@ -67,6 +72,11 @@ public class MainActivity extends AppCompatActivity {
         language1=findViewById(R.id.eng);
         language2=findViewById(R.id.ur);
         translation=findViewById(R.id.translation);
+
+        initSharedPref();
+        language1.setText(getPrefernceValues("Name"));
+        language2.setText(getPrefernceValues2("Second"));
+
 
         language1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,5 +163,22 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+    public void initSharedPref(){
+        sharedPreferences=getSharedPreferences("myPref",MODE_PRIVATE);
+        sharedPreferencesEditor=sharedPreferences.edit();
+
+    }
+    public void putPrefernceValues(String n,String s){
+        sharedPreferencesEditor.putString(n,s);
+        sharedPreferencesEditor.apply();
+    }
+    public String getPrefernceValues(String n){
+        String ng=sharedPreferences.getString(n,"English");
+return ng;
+    }
+    public String getPrefernceValues2(String n){
+        String ng=sharedPreferences.getString(n,"Urdu");
+        return ng;
     }
 }

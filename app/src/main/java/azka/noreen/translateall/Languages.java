@@ -1,5 +1,6 @@
 package azka.noreen.translateall;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,27 +8,90 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import java.util.ArrayList;
 
 public class Languages extends AppCompatActivity {
     RecyclerView recycleView;
     ArrayList<LanguageModel> studentNameCourseArrayList;
+    EditText languageToBeSearched;
+    Toolbar searchToolbar;
+    LanguageRecycler fra;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_languages);
         recycleView=findViewById(R.id.languages);
+        languageToBeSearched=findViewById(R.id.searchLanguage);
+        searchToolbar=findViewById(R.id.toolbars);
+
+        setSupportActionBar(searchToolbar);
+        searchToolbar.setTitle("Languages");
         studentNameCourseArrayList=initLanguages();
         InitRecycleView();
 
 
+        languageToBeSearched.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchToolbar.getMenu().findItem(R.id.clears).setVisible(true);
+                ArrayList<LanguageModel> searched=new ArrayList<>();
+                for(int i=0;i<studentNameCourseArrayList.size();i++){
+                    if(studentNameCourseArrayList.get(i).getName().toLowerCase().startsWith(languageToBeSearched.getText().toString().toLowerCase())){
+                        searched.add(studentNameCourseArrayList.get(i));
+                    }
+                }
+                fra.setData(searched);
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toobar,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int menuItem=item.getItemId();
+        if(menuItem==R.id.searchLanguage){
+            languageToBeSearched.setVisibility(View.VISIBLE);
+//            searchToolbar.setTitle("");
+            item.setVisible(false);
+        }
+        else if(menuItem==R.id.clears){
+            languageToBeSearched.setText("");
+//            searchToolbar.setTitle("");
+            item.setVisible(false);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public void InitRecycleView(){
-        LanguageRecycler fra=new LanguageRecycler();
+        fra=new LanguageRecycler();
         fra.setMyInterface(new MyInterface() {
             @Override
             public void onLanguageClick(LanguageModel language) {

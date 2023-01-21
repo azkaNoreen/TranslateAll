@@ -2,6 +2,7 @@ package azka.noreen.translateall;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,7 +40,14 @@ public class Languages extends AppCompatActivity {
         searchToolbar.setTitle("Languages");
         studentNameCourseArrayList=initLanguages();
         InitRecycleView();
+        searchToolbar.getNavigationIcon().setTint(ContextCompat.getColor(Languages.this,R.color.white));
 
+        searchToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         languageToBeSearched.addTextChangedListener(new TextWatcher() {
             @Override
@@ -49,6 +57,8 @@ public class Languages extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchToolbar.getMenu().findItem(R.id.clears).getIcon().setTint(ContextCompat.getColor(Languages.this,R.color.white));
+
                 searchToolbar.getMenu().findItem(R.id.clears).setVisible(true);
                 ArrayList<LanguageModel> searched=new ArrayList<>();
                 for(int i=0;i<studentNameCourseArrayList.size();i++){

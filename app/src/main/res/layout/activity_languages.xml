@@ -8,21 +8,22 @@
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        app:titleTextColor="@color/white"
         android:id="@+id/toolbars"
         app:title="All Translate"
         android:background="#2D7BF8"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:titleTextColor="@android:color/white"
         >
         <EditText
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/searchLanguage"
             android:visibility="gone"
             android:textColor="@color/white"
+            android:textCursorDrawable="@null"
             android:hint="Enter Text to Search"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:titleTextColor="@android:color/white"
             android:background="@null"
             ></EditText>
     </androidx.appcompat.widget.Toolbar>

@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -25,6 +26,8 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     DrawerLayout drawerLayout;
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     TextView language1,language2,translation;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor sharedPreferencesEditor;
+    String spokenText;
+    private static final int SPEECH_REQUEST_CODE = 0;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -55,8 +60,23 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
+            List<String> results = data.getStringArrayListExtra(
+                    RecognizerIntent.EXTRA_RESULTS);
+            spokenText = results.get(0);
+            text.setText(spokenText);
+            // Do something with spokenText.
+        }
     }
 
+    // Create an intent that can start the Speech Recognizer activity
+    private void displaySpeechRecognizer() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+// This starts the activity and populates the intent with the speech text.
+        startActivityForResult(intent, SPEECH_REQUEST_CODE);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +97,12 @@ public class MainActivity extends AppCompatActivity {
         language1.setText(getPrefernceValues("Name"));
         language2.setText(getPrefernceValues2("Second"));
 
-
+        mic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displaySpeechRecognizer();
+            }
+        });
         language1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

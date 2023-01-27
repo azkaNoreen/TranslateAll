@@ -36,10 +36,11 @@ public class Languages extends AppCompatActivity {
         languageToBeSearched=findViewById(R.id.searchLanguage);
         searchToolbar=findViewById(R.id.toolbars);
 
-        setSupportActionBar(searchToolbar);
-        searchToolbar.setTitle("Languages");
+
         studentNameCourseArrayList=initLanguages();
         InitRecycleView();
+        setSupportActionBar(searchToolbar);
+        searchToolbar.setTitle("Languages");
         searchToolbar.getNavigationIcon().setTint(ContextCompat.getColor(Languages.this,R.color.white));
 
         searchToolbar.setNavigationOnClickListener(new View.OnClickListener() {

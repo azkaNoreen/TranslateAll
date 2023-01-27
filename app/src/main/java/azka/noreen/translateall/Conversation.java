@@ -2,6 +2,7 @@ package azka.noreen.translateall;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,8 +11,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
+import androidx.appcompat.widget.Toolbar;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +25,10 @@ public class Conversation extends AppCompatActivity {
     RecyclerView recycleView;
     ArrayList<ConversationModel> studentNameCourseArrayList;
     ConversationAdapter fra;
+    Toolbar conversationTolbar;
+    Button clear;
+    TextView rightLanguage,leftLanguage;
+    ImageButton rightdown,leftdown;
     private static final int Right_REQUEST_CODE = 0;
     private static final int Left_REQUEST_CODE = 1;
     @Override
@@ -30,9 +38,25 @@ public class Conversation extends AppCompatActivity {
         leftMic=findViewById(R.id.firstMic);
         rightMic=findViewById(R.id.secondMic);
         recycleView=findViewById(R.id.conversationRV);
+        conversationTolbar=findViewById(R.id.toolbarConversation);
+        clear=findViewById(R.id.clearAll);
+        leftLanguage=findViewById(R.id.left);
+        leftdown=findViewById(R.id.leftdownArrow);
+        rightLanguage=findViewById(R.id.rightCOnveration);
+        rightdown=findViewById(R.id.rightdown);
 
+        studentNameCourseArrayList=new ArrayList<>();
         InitRecycleView();
 
+        setSupportActionBar(conversationTolbar);
+        conversationTolbar.getNavigationIcon().setTint(ContextCompat.getColor(Conversation.this,R.color.white));
+
+        conversationTolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
         leftMic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,6 +67,14 @@ public class Conversation extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 displaySpeechRecognizer(Right_REQUEST_CODE);
+            }
+        });
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                studentNameCourseArrayList.clear();
+                clear.setVisibility(View.INVISIBLE);
+                fra.notifyDataSetChanged();
             }
         });
 
@@ -64,6 +96,8 @@ public class Conversation extends AppCompatActivity {
             String spokenText = results.get(0);
             ConversationModel lm=new ConversationModel(spokenText,ConversationModel.LeftConversation);
             studentNameCourseArrayList.add(lm);
+            clear.setVisibility(View.VISIBLE);
+            fra.notifyItemInserted(studentNameCourseArrayList.size());
 
             // Do something with spokenText.
         }
@@ -73,6 +107,8 @@ public class Conversation extends AppCompatActivity {
             String spokenText = results.get(0);
             ConversationModel lm=new ConversationModel(spokenText,ConversationModel.RightConversation);
             studentNameCourseArrayList.add(lm);
+            clear.setVisibility(View.VISIBLE);
+            fra.notifyItemInserted(studentNameCourseArrayList.size());
 
             // Do something with spokenText.
         }

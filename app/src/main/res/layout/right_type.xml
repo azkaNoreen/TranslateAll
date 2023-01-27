@@ -7,17 +7,19 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/leftconversation"
+        android:background="@drawable/rightconversation"
+        android:layout_alignParentEnd="true"
         android:padding="30dp"
         >
         <TextView
-            android:layout_marginStart="12dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="English"
-            android:textColor="#539DC2"
-            android:layout_centerVertical="true"
-            android:id="@+id/leftText"
-            ></TextView>
+        android:layout_marginStart="12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="English"
+        android:textColor="#539DC2"
+        android:layout_centerVertical="true"
+        android:id="@+id/rightText"
+        ></TextView>
     </RelativeLayout>
+
 </RelativeLayout>

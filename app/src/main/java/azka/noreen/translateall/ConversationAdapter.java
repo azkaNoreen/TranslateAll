@@ -20,22 +20,44 @@ public class ConversationAdapter extends RecyclerView.Adapter {
         switch (viewType) {
             case ConversationModel.LeftConversation:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.left_type, parent, false);
-                return new TextTypeViewHolder(view);
+                return new LeftViewHolder(view);
             case ConversationModel.RightConversation:
                 view = LayoutInflater.from(parent.getContext()).inflate(R.layout.right_type, parent, false);
-                return new ImageTypeViewHolder(view);
+                return new RightViewHolder(view);
         }
         return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        ConversationModel object = callArrayList.get(position);
+        if (object != null) {
+            switch (object.type) {
+                case ConversationModel.LeftConversation:
+                    ((LeftViewHolder) holder).txtType.setText(object.getTextEntered());
+                    break;
+                case ConversationModel.RightConversation:
+                    ((RightViewHolder) holder).txtType.setText(object.getTextEntered());
+                    break;
+            }
+        }
+    }
+    @Override
+    public int getItemViewType(int position) {
 
+        switch (callArrayList.get(position).type) {
+            case 0:
+                return ConversationModel.RightConversation;
+            case 1:
+                return ConversationModel.LeftConversation;
+            default:
+                return -1;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return callArrayList.size();
     }
     public void setData(List<ConversationModel> CallArrayList){
         this.callArrayList=CallArrayList;
@@ -49,7 +71,7 @@ public class ConversationAdapter extends RecyclerView.Adapter {
 
         public LeftViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.txtType = (TextView) itemView.findViewById(R.id.type);
+            this.txtType = (TextView) itemView.findViewById(R.id.leftText);
         }
 
     }
@@ -59,7 +81,7 @@ public class ConversationAdapter extends RecyclerView.Adapter {
 
         public RightViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.txtType = (TextView) itemView.findViewById(R.id.type);
+            this.txtType = (TextView) itemView.findViewById(R.id.rightText);
         }
 
     }

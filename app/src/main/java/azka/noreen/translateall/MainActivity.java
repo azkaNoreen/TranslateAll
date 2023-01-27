@@ -174,6 +174,8 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int menuItemId=item.getItemId();
                 if(menuItemId==R.id.share){
+                    Intent in = new Intent(MainActivity.this, Conversation.class);
+                    startActivity(in);
                     Toast.makeText(MainActivity.this, "Share Clicked", Toast.LENGTH_SHORT).show();
                     drawerLayout.closeDrawer(GravityCompat.START);
                 }else if(menuItemId==R.id.bookmarkedList){

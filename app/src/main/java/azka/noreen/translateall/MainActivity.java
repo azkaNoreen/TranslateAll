@@ -213,22 +213,19 @@ public class MainActivity extends AppCompatActivity {
                 if(response!=null) {
                     try{
                     JsonArray dataList = response.body();
-                        Log.d("res", dataList+"");
+                        Log.d("Rez", dataList+"");
 
                         StringBuilder word=new StringBuilder();
                     JsonArray inner = (JsonArray) dataList.get(0);
                     for (int i = 0; i < inner.size(); i++) {
                         JsonArray parseResult = (JsonArray) inner.get(i);
-
                         String result = (String)parseResult.get(0).getAsString();
                         if (!result.contains("null")) {
                             word.append(result);
-                            translation.setText(result);
-                            Log.d("res", result+"");
                         }
 
                     }
-
+                        translation.setText(word.toString());
                     }
                     catch (Exception e){
 

@@ -80,6 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:background="@null"
+            android:tint="#3375FD"
             android:src="@drawable/ic_baseline_volume_up_24" />
 
     </LinearLayout>

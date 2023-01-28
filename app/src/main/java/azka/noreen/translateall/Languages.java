@@ -108,6 +108,8 @@ public class Languages extends AppCompatActivity {
             public void onLanguageClick(LanguageModel language) {
                 Intent intent=new Intent();
                 intent.putExtra("Name",language.getName());
+                intent.putExtra("Code",language.getCode());
+
                 setResult(Activity.RESULT_OK,intent);
                 finish();
             }

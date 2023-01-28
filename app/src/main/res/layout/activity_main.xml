@@ -109,7 +109,7 @@ android:id="@+id/ur"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="55dp"
                 android:layout_marginBottom="5dp"
                 android:background="@null"
                 android:hint="Enter text to Translate"></EditText>
@@ -139,6 +139,16 @@ android:id="@+id/ur"
                 ></ImageButton>
 
             </RelativeLayout>
+
+        <ProgressBar
+            android:visibility="invisible"
+            android:id="@+id/loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btmbox"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="100dp"></ProgressBar>
         <RelativeLayout
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"

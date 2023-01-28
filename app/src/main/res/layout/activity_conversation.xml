@@ -73,7 +73,7 @@
             ></TextView>
         <ImageButton
             android:id="@+id/leftdownArrow"
-            android:layout_marginStart="17dp"
+            android:layout_marginStart="14dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -87,6 +87,7 @@
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:id="@+id/swaplanguage"
         android:layout_width="45dp"
         android:layout_height="45dp"
@@ -124,7 +125,7 @@
             android:layout_marginLeft="14dp"
             ></ImageButton>
         <TextView
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="English"
@@ -132,6 +133,8 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@id/rightdown"
             android:id="@+id/rightCOnveration"
+            android:lines="1"
+            android:ellipsize="end"
             ></TextView>
         <ImageButton
             android:id="@+id/secondMic"
@@ -139,12 +142,11 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:src="@drawable/ic_baseline_mic_24"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:layout_marginEnd="14dp"
             android:layout_toRightOf="@id/rightCOnveration"
             android:padding="3dp"
             android:background="@drawable/circle"
-            android:layout_marginStart="13dp"
             ></ImageButton>
     </RelativeLayout>
 </RelativeLayout>

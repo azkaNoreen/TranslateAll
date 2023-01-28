@@ -20,13 +20,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.JsonArray;
 
 import java.util.List;
+
+import azka.noreen.translateall.API.RetrofitClient;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -39,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor sharedPreferencesEditor;
     String spokenText;
+    ProgressBar Loading;
     private static final int SPEECH_REQUEST_CODE = 0;
 
     @Override
@@ -92,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         language1=findViewById(R.id.eng);
         language2=findViewById(R.id.ur);
         translation=findViewById(R.id.translation);
+        Loading=findViewById(R.id.loading);
 
         initSharedPref();
         language1.setText(getPrefernceValues("Name"));
@@ -132,10 +141,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(camera.getTag().equals("Arrow")){
-                    translation.setText(text.getText().toString());
+                    Loading.setVisibility(View.VISIBLE);
+                    getRetrofitTranslation(text.getText().toString(),"en","ur");
                     mic.setVisibility(View.VISIBLE);
                     mic.setImageResource(R.drawable.ic_baseline_volume_up_24);
-                    bottombg.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -191,6 +200,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public void getRetrofitTranslation(String inputWord,String InputLanguage,String TargetLanguage){
+
+        RetrofitClient retrofitClient= new RetrofitClient();
+        Call<JsonArray> userDetail= retrofitClient.getUserService().getTrans(InputLanguage,TargetLanguage,inputWord);
+        userDetail.enqueue(new Callback<JsonArray>() {
+            @Override
+            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                Loading.setVisibility(View.GONE);
+                bottombg.setVisibility(View.VISIBLE);
+
+                if(response!=null) {
+                    try{
+                    JsonArray dataList = response.body();
+                        Log.d("res", dataList+"");
+
+                        StringBuilder word=new StringBuilder();
+                    JsonArray inner = (JsonArray) dataList.get(0);
+                    for (int i = 0; i < inner.size(); i++) {
+                        JsonArray parseResult = (JsonArray) inner.get(i);
+
+                        String result = (String)parseResult.get(0).getAsString();
+                        if (!result.contains("null")) {
+                            word.append(result);
+                            translation.setText(result);
+                            Log.d("res", result+"");
+                        }
+
+                    }
+
+                    }
+                    catch (Exception e){
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonArray> call, Throwable t) {
+
+                int i =0;
+            }
+        });
+    }
+
     public void initSharedPref(){
         sharedPreferences=getSharedPreferences("myPref",MODE_PRIVATE);
         sharedPreferencesEditor=sharedPreferences.edit();

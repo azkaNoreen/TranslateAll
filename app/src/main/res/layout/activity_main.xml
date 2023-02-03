@@ -48,15 +48,14 @@
                 android:src="@drawable/ic_baseline_arrow_drop_down_24"
 
                 ></ImageButton>
+
             <ImageButton
+                android:id="@+id/swap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
                 android:layout_centerInParent="true"
                 android:background="@null"
-                android:src="@drawable/ic_baseline_swap_horiz_24"
-
-                ></ImageButton>
+                android:src="@drawable/ic_baseline_swap_horiz_24"></ImageButton>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,7 +184,6 @@ android:id="@+id/ur"
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="5dp"
                 android:background="@null"
-                android:text="Urdu"
                 android:textColor="@color/white"
                 android:id="@+id/translation"
                 ></TextView>

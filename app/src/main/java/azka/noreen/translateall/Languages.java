@@ -119,7 +119,7 @@ public class Languages extends AppCompatActivity {
         fra.setData(studentNameCourseArrayList);
 
     }
-    private ArrayList<LanguageModel> initLanguages() {
+    static ArrayList<LanguageModel> initLanguages() {
         ArrayList<LanguageModel> langList=new ArrayList<>();
         langList.add(new LanguageModel("af", "Afrikaans", "Afrikaans", "ZA"));
         langList.add(new LanguageModel("sq", "Albanian", "shqiptar", "AL"));

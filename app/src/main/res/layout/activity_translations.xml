@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Translations">
-    <ListView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/dt"></ListView>
+        android:id="@+id/dt"></androidx.recyclerview.widget.RecyclerView>
 
 </RelativeLayout>

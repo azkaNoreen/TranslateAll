@@ -1,6 +1,8 @@
 package azka.noreen.translateall;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
 import android.os.Bundle;
@@ -13,7 +15,7 @@ import azka.noreen.translateall.database.TextEntity;
 import azka.noreen.translateall.database.appDatabase;
 
 public class Translations extends AppCompatActivity {
-    ListView d;
+    RecyclerView d;
     appDatabase db=MainActivity.db;
 
     @Override
@@ -22,8 +24,13 @@ public class Translations extends AppCompatActivity {
         setContentView(R.layout.activity_translations);
         d=findViewById(R.id.dt);
         List<TextEntity> allStudent=db.textDAO().getAll();
-        ArrayAdapter<TextEntity> as=new ArrayAdapter<TextEntity>(this,android.R.layout.simple_list_item_1,allStudent);
-        d.setAdapter(as);
+        HistoryRecyclerAdapter historyRecyclerAdapter=new HistoryRecyclerAdapter();
+        d.setAdapter(historyRecyclerAdapter);
+        d.setLayoutManager(new LinearLayoutManager(this));
+        d.addItemDecoration(new SimpleDividerItemDecoration(this));
+
+        historyRecyclerAdapter.setData(allStudent);
+
     }
 
 

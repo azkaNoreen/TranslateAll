@@ -85,9 +85,31 @@ public class MainActivity extends AppCompatActivity {
 
         initSharedPref();
         MakeDB();
+
         language1.setText(getPrefernceValues("Language"));
         language2.setText(getPrefernceValues2("TranslateLanguage"));
         mic.setImageResource(R.drawable.ic_baseline_mic_24);
+
+        Intent intent=getIntent();
+        if(intent.getAction().equals("History")){
+        String word=intent.getStringExtra("word");
+        String outputWord=intent.getStringExtra("outputWord");
+        String inputLang=intent.getStringExtra("inputLang");
+        String translationIntent=intent.getStringExtra("translation");
+
+            text.setText(word);
+            mic.setVisibility(View.VISIBLE);
+            mic.setImageResource(R.drawable.ic_baseline_volume_up_24);
+            cancel.setVisibility(View.VISIBLE);
+            camera.setTag("Arrow");
+            camera.setImageResource(R.drawable.ic_baseline_arrow_forward_24);
+            translation.setText(outputWord);
+            translationLanguage.setText(translationIntent);
+            bottombg.setVisibility(View.VISIBLE);
+            language1.setText(inputLang);
+            language2.setText(translationIntent);
+        }
+
 
         mic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,17 +175,29 @@ public class MainActivity extends AppCompatActivity {
         swap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 String Lang= language2.getText().toString();
                 String lang2=language1.getText().toString();
+                String input=translation.getText().toString();
                 language2.setText(language1.getText().toString());
                 language1.setText(Lang);
+                String output=text.getText().toString();
+
                 if((!text.getText().toString().equals("") && !translation.getText().toString().equals("")))
                 {
-                    String t=text.getText().toString();
                     text.setText(translation.getText().toString());
-                    translation.setText(t);
+                    translation.setText(output);
                     translationLanguage.setText(lang2);
                 }
+                TextEntity textEntity=new TextEntity();
+                textEntity.setInput_word(input);
+                textEntity.setOutput_word(output);
+                textEntity.setInput_language(Lang);
+                textEntity.setTranslation_language(lang2);
+                textEntity.setInput_language_code(findCode(Lang));
+                textEntity.setTranslation_language_code(findCode(lang2));
+                db.textDAO().insertText(textEntity);
+
             }
         });
 
@@ -232,10 +266,10 @@ public class MainActivity extends AppCompatActivity {
                     TextEntity textEntity=new TextEntity();
                     textEntity.setInput_word(inputWord);
                     textEntity.setOutput_word(word.toString());
-                    textEntity.setInput_language(InputLanguage);
-                    textEntity.setTranslation_language(TargetLanguage);
-                    textEntity.setInput_language_code(findCode(InputLanguage));
-                    textEntity.setTranslation_language_code(findCode(TargetLanguage));
+                    textEntity.setInput_language(language1.getText().toString());
+                    textEntity.setTranslation_language(language2.getText().toString());
+                    textEntity.setInput_language_code(InputLanguage);
+                    textEntity.setTranslation_language_code(TargetLanguage);
                     db.textDAO().insertText(textEntity);
                     }
                     catch (Exception e){
@@ -260,8 +294,6 @@ public class MainActivity extends AppCompatActivity {
                 if (data != null) {
                     language1.setText(data.getStringExtra("Name"));
                     putPrefernceValues("Language",data.getStringExtra("Name"));
-
-
                 }
             }
         }

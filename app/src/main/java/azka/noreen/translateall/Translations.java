@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -25,6 +27,7 @@ public class Translations extends AppCompatActivity {
         d=findViewById(R.id.dt);
         List<TextEntity> allStudent=db.textDAO().getAll();
         HistoryRecyclerAdapter historyRecyclerAdapter=new HistoryRecyclerAdapter();
+
         d.setAdapter(historyRecyclerAdapter);
         d.setLayoutManager(new LinearLayoutManager(this));
         d.addItemDecoration(new SimpleDividerItemDecoration(this));

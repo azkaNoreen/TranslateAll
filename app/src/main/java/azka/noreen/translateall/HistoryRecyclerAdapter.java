@@ -1,5 +1,6 @@
 package azka.noreen.translateall;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
@@ -18,6 +19,7 @@ import azka.noreen.translateall.database.TextEntity;
 
 public class HistoryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     List<TextEntity> callArrayList;
+
 
     @NonNull
     @Override
@@ -39,12 +41,14 @@ public class HistoryRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         callHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent in=new Intent(view.getContext(), CallDetail.class);
-//                in.putExtra("Name",st.getPersonName());
-//                in.putExtra("Type",st.getCallType());
-//                in.putExtra("Duration",st.getCallDuration());
-//                in.putExtra("Date",dateString);
-//                view.getContext().startActivity(in);
+                Intent in=new Intent(view.getContext(), MainActivity.class);
+                in.putExtra("word",st.getInput_word());
+                in.putExtra("outputWord",st.getOutput_word());
+                in.putExtra("inputLang",st.getInput_language());
+                in.putExtra("translation",st.getTranslation_language());
+                in.setAction("History");
+                view.getContext().startActivity(in);
+//
              }
         });
     }

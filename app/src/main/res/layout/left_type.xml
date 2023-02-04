@@ -28,7 +28,7 @@
         />
 
     <TextView
-        android:id="@+id/belowc_chat2"
+        android:id="@+id/belowc_chatl"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/line"

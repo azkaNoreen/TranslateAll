@@ -38,6 +38,8 @@ public class ConversationAdapter extends RecyclerView.Adapter {
             switch (object.type) {
                 case ConversationModel.LeftConversation:
                     ((LeftViewHolder) holder).txtType.setText(object.getTextEntered());
+                    ((LeftViewHolder) holder).translated.setText(object.getTranslated());
+
                     ((LeftViewHolder) holder).txtType.measure(0, 0);       //must call measure!
                     int width=((LeftViewHolder) holder).txtType.getMeasuredWidth();  //get width
                     int hight=((LeftViewHolder) holder).txtType.getMeasuredHeight();  //get width
@@ -49,6 +51,8 @@ public class ConversationAdapter extends RecyclerView.Adapter {
                     break;
                 case ConversationModel.RightConversation:
                     ((RightViewHolder) holder).txtType.setText(object.getTextEntered());
+                    ((RightViewHolder) holder).translated.setText(object.getTranslated());
+
                     break;
             }
         }
@@ -78,23 +82,27 @@ public class ConversationAdapter extends RecyclerView.Adapter {
 
     public static class LeftViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtType;
+        TextView txtType,translated;
         RelativeLayout line;
 
         public LeftViewHolder(@NonNull View itemView) {
             super(itemView);
             this.txtType = (TextView) itemView.findViewById(R.id.leftText);
             this.line=(RelativeLayout) itemView.findViewById(R.id.line);
+            this.translated = (TextView) itemView.findViewById(R.id.belowc_chatl);
+
         }
 
     }
     public static class RightViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtType;
+        TextView txtType,translated;
 
         public RightViewHolder(@NonNull View itemView) {
             super(itemView);
             this.txtType = (TextView) itemView.findViewById(R.id.rightText);
+            this.translated = (TextView) itemView.findViewById(R.id.belowc_chat2);
+
         }
 
     }

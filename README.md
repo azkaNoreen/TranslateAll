@@ -10,4 +10,4 @@ Translator supporting hundreds of the languages, with added feature of text to s
 ![image](https://user-images.githubusercontent.com/99603170/236693867-0c51077f-6023-454f-96ba-a77d903c34d1.png)
 </br>Menu</br>
 ![image](https://user-images.githubusercontent.com/99603170/236693897-ec0c6e6c-6f5b-4a85-96f1-66e7ca42c8c6.png)
-Don't forget to star⭐ the repo if you like what you see😉.
+</br>Don't forget to star⭐ the repo if you like what you see😉.
